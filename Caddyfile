@@ -1,0 +1,4 @@
+# Replace 'peppol-viewer.bytebraintechnologies.com' with your own domain
+peppol-viewer.bytebraintechnologies.com {
+    reverse_proxy peppol-app:8000
+}

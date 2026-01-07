@@ -1,0 +1,9 @@
+fastapi==0.109.0
+uvicorn==0.27.0
+python-multipart==0.0.9
+requests==2.31.0
+python-dotenv==1.0.0
+paramiko==3.4.0
+scp==0.14.5
+saxonche==12.9.0
+

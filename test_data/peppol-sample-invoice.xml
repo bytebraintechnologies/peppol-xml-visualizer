@@ -1,0 +1,1616 @@
+<ubl:Invoice xmlns:ubl="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0</cbc:CustomizationID>
+    <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+    <cbc:ID>9901289682</cbc:ID>
+    <cbc:IssueDate>2025-11-18</cbc:IssueDate>
+    <cbc:DueDate>2025-12-18</cbc:DueDate>
+    <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+    <cbc:BuyerReference>O-0063860710</cbc:BuyerReference>
+    <cac:OrderReference>
+        <cbc:ID>O-0063860710</cbc:ID>
+    </cac:OrderReference>
+    <cac:DespatchDocumentReference>
+        <cbc:ID>0462872010</cbc:ID>
+    </cac:DespatchDocumentReference>
+    <cac:ContractDocumentReference>
+        <cbc:ID>0130552409</cbc:ID>
+    </cac:ContractDocumentReference>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>9901289682.pdf</cbc:ID>
+        <cbc:DocumentDescription>CommercialInvoice</cbc:DocumentDescription>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject filename="9901289682.pdf" mimeCode="application/pdf"> base64</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <cac:AdditionalDocumentReference>
+        <cbc:ID>GENERAL SALES AND DELIVERY CONDITIONS BELUX.pdf</cbc:ID>
+        <cbc:DocumentDescription>GENERAL SALES AND DELIVERY CONDITIONS BELUX</cbc:DocumentDescription>
+        <cac:Attachment>
+            <cbc:EmbeddedDocumentBinaryObject filename="GENERAL SALES AND DELIVERY CONDITIONS BELUX.pdf" mimeCode="application/pdf"> base64</cbc:EmbeddedDocumentBinaryObject>
+        </cac:Attachment>
+    </cac:AdditionalDocumentReference>
+    <cac:AccountingSupplierParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="0208">0425071420</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID schemeID="0088">5425012620001</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>Coca-Cola Europacific Partners Belgium SRL/BV</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>Bergense Steenweg / chaussée d 1424</cbc:StreetName>
+                <cbc:CityName>Brussel / Bruxelles</cbc:CityName>
+                <cbc:PostalZone>1070</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>BE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>BE0425071420</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>Coca-Cola Europacific Partners Belgium SRL/BV</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0208">0425071420</cbc:CompanyID>
+                <cbc:CompanyLegalForm>BV, RPR Brussel - SRL, RPM Bruxelles</cbc:CompanyLegalForm>
+            </cac:PartyLegalEntity>
+            <cac:Contact>
+                <cbc:Name>Coca-Cola Belgium-http://www.cocacolabelgium.be</cbc:Name>
+                <cbc:Telephone>+32 2 200 84 84</cbc:Telephone>
+                <cbc:ElectronicMail>mpaunova@ccep.com</cbc:ElectronicMail>
+            </cac:Contact>
+        </cac:Party>
+    </cac:AccountingSupplierParty>
+    <cac:AccountingCustomerParty>
+        <cac:Party>
+            <cbc:EndpointID schemeID="9925">BE0655901825</cbc:EndpointID>
+            <cac:PartyIdentification>
+                <cbc:ID>0005611219</cbc:ID>
+            </cac:PartyIdentification>
+            <cac:PartyName>
+                <cbc:Name>UYLENBROECK  DRANKEN &amp;</cbc:Name>
+            </cac:PartyName>
+            <cac:PostalAddress>
+                <cbc:StreetName>HOOGSTRAAT 29</cbc:StreetName>
+                <cbc:CityName>PERK</cbc:CityName>
+                <cbc:PostalZone>1820</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>BE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:PostalAddress>
+            <cac:PartyTaxScheme>
+                <cbc:CompanyID>BE0655901825</cbc:CompanyID>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:PartyTaxScheme>
+            <cac:PartyLegalEntity>
+                <cbc:RegistrationName>UYLENBROECK  DRANKEN &amp;</cbc:RegistrationName>
+                <cbc:CompanyID schemeID="0208">0655901825</cbc:CompanyID>
+            </cac:PartyLegalEntity>
+        </cac:Party>
+    </cac:AccountingCustomerParty>
+    <cac:Delivery>
+        <cbc:ActualDeliveryDate>2025-11-18</cbc:ActualDeliveryDate>
+        <cac:DeliveryLocation>
+            <cbc:ID>5081394</cbc:ID>
+            <cac:Address>
+                <cbc:StreetName>HOOGSTRAAT 29</cbc:StreetName>
+                <cbc:CityName>PERK</cbc:CityName>
+                <cbc:PostalZone>1820</cbc:PostalZone>
+                <cac:Country>
+                    <cbc:IdentificationCode>BE</cbc:IdentificationCode>
+                </cac:Country>
+            </cac:Address>
+        </cac:DeliveryLocation>
+        <cac:DeliveryParty>
+            <cac:PartyName>
+                <cbc:Name>DRANKEN &amp; ZUIVELH. UYLENBROECK SOFT</cbc:Name>
+            </cac:PartyName>
+        </cac:DeliveryParty>
+    </cac:Delivery>
+    <cac:PaymentMeans>
+        <cbc:PaymentMeansCode>31</cbc:PaymentMeansCode>
+        <cbc:PaymentID>9901289682</cbc:PaymentID>
+        <cac:PayeeFinancialAccount>
+            <cbc:ID>BE62570131425661</cbc:ID>
+            <cac:FinancialInstitutionBranch>
+                <cbc:ID>CITIBEBX</cbc:ID>
+            </cac:FinancialInstitutionBranch>
+        </cac:PayeeFinancialAccount>
+    </cac:PaymentMeans>
+    <cac:TaxTotal>
+        <cbc:TaxAmount currencyID="EUR">661.24</cbc:TaxAmount>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">11020.7</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">661.24</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+        <cac:TaxSubtotal>
+            <cbc:TaxableAmount currencyID="EUR">4130</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="EUR">0</cbc:TaxAmount>
+            <cac:TaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cbc:TaxExemptionReason>Leeggoed/Vidange/Consumer Empties</cbc:TaxExemptionReason>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:TaxCategory>
+        </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:LegalMonetaryTotal>
+        <cbc:LineExtensionAmount currencyID="EUR">15150.7</cbc:LineExtensionAmount>
+        <cbc:TaxExclusiveAmount currencyID="EUR">15150.7</cbc:TaxExclusiveAmount>
+        <cbc:TaxInclusiveAmount currencyID="EUR">15811.94</cbc:TaxInclusiveAmount>
+        <cbc:PayableAmount currencyID="EUR">15811.94</cbc:PayableAmount>
+    </cac:LegalMonetaryTotal>
+    <cac:InvoiceLine>
+        <cbc:ID>000001</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">505.65</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>1</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF STILL RGLS0,5L X20 - 1237 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380033</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000113344</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">10.113</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000002</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">50</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">250</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>2</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT20X0.50L G CHF Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000410011</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000117410</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000003</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">140</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1709.76</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>3</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA RGLS0,2L X24 - 2177 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380146</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000000002</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">12.212571</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000004</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">140</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">700</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>4</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G CTR Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000059582059</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000005</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">3</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">88.04</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>5</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA ORANGE NRP0,5L 4X6P - 4150 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380307</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000020741</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">29.346667</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000006</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">70</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">854.88</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>6</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA ORANGE RGLS0,2L X24 - 2109 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380131</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000011893</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">12.212571</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000007</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">70</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">350</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>7</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G RCL Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406032</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000008</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">39.66</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>8</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA NRP0,25L 3X8P - 7293 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000410077</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000175823</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">19.83</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000009</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">28.41</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>9</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA OR ZRO NRP0,5L 4X6P - 9634 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000404274</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000152558</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">28.41</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000010</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">271.33</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>10</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF STILL RGLS1L 6P - 5117 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411306</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000127716</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.391625</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000011</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">280</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>11</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT6X1L G CHF Y CHEP UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411388</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000179968</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000012</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">891.87</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>12</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO RGLS1L 6P - 4569 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411309</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000145512</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">11.148375</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000013</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">280</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>13</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT6X1L G CTR Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411389</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000144232</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000014</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">122.13</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>14</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>SPRITE RGLS0,2L X24 - 2071 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380122</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000003003</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">12.213</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000015</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">50</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>15</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G DIM Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406031</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000016</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">271.33</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>16</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF LT SPL RGLS1L 6P - 4808 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411304</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000139498</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.391625</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000017</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">280</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>17</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT6X1L G CHF Y CHEP UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411388</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000179968</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000018</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">40</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">271.73</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>18</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF SPKL RGLS1L X12 - 8809 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380659</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000113382</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">6.79325</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000019</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">40</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">180</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>19</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT12X1L G CHF Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000410010</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000117441</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">4.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000020</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">140</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">1629.92</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>20</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO RGLS0,2L X24 - 0794 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380008</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000134394</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">11.642286</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000021</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">140</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">700</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>21</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G CTR Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000059582059</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000022</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">24</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">704.3</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>22</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA NRP0,5L X24 ICE - 6335 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000644577</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5000112687880</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">29.345833</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000023</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">116.42</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>23</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA LT RGLS0,2L X24 - 2182 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380147</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000057747</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">11.642</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000024</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">10</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">50</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>24</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G CTR Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000059582059</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000025</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">857.1</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>25</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA ORANGE RGLS1L 6P - 4689 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411310</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000037824</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">10.71375</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000026</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">280</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>26</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT6X1L G MLT Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411390</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000144232</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">3.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000027</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">12</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">340.94</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>27</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO NRP0,5L X24 ICE - 2366 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000644574</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5000112687897</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">28.411667</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000028</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">29.35</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>28</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>SPRITE NRP0,5L 4X6P - 4658 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380361</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000020758</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">29.35</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000029</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">70</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">451.89</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>29</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF STILL RGLS0,25L X24 - 8585 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380624</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000127877</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">6.455571</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000030</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">70</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">350</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>30</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.25L G CHF B UNS BLUE - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406004</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000132741</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000031</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">58.69</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>31</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA NRP0,5L 4X6P - 6595 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380450</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000020680</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">29.345</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000032</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">543.46</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>32</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF STILL RGLS1L X12 - 8810 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380660</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000113375</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">6.79325</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000033</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">80</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">360</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>33</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT12X1L G CHF Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000410010</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000117441</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">4.5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000034</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">6</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">85.94</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>34</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO NRP1,5L 6P - 4578 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411275</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000134578</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">14.323333</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000035</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">86.58</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>35</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA ORANGE BLIK0,33L X24 - 2108 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000401402</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000011541</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">17.316</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000036</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">20</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">108.97</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>36</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF STILL NRP1L 6P - 5040 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411292</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000002730</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5.4485</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000037</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">51.24</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>37</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>APPLETISER NRGL275ML X24 NEW - 5168 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000641107</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5017726166854</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">25.62</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000038</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">12</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">138.09</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>38</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CHAUDF SPKL NRP0,33L 4X6P - 1664 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380089</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000120557</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">11.5075</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000039</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">37.53</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>39</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO NRP0,25L 3X8P - 7297 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000410171</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000175861</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">18.765</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000040</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">63.61</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>40</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA ZRO BLIK0,15L 2X12P - 4182 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406613</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000138163</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">12.722</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000041</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">6</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">92.49</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>41</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA NRP1,5L 6P - 4600 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000411271</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000050564</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">15.415</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000042</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">67.64</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>42</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>COCA-COLA BLIK0,15L 2X12P - 2129 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000380136</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000034236</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">13.528</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000043</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">4</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">54.27</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>43</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>MM APPL/KERS RGLS0,2L X24 - 3266 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000404906</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000157188</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">13.5675</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000044</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">4</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">20</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>44</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CRBT24X0.20L G RCL Y UNS - 0000 0000</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406032</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000014313</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>E</cbc:ID>
+                <cbc:Percent>0</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">5</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000045</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">57.54</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>45</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>MM MULTIVIT  NRP0,33L 6X4P - 0797 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000446130</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000110817</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">28.77</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000046</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">24.84</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>46</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FUZETEA PCH HIB NRP400ML 4X6P - 3736 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000284456</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000309099</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">24.84</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000047</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">4</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">72.5</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>47</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FUZETEA PCH HIB SCAN0,33L 4X6P - 3923 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000284436</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000308825</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">18.125</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000048</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">36.05</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>48</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>PWA MTN BLAST NRP0,5L 4X6P - 5750 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000642717</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000324481</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">36.05</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000049</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">1</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">27.05</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>49</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>MM ORANGE NECTAR BRIK0,2L 5X6P - 0698 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000644550</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000340092</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">27.05</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000050</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">28.38</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>50</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>MM ORANGE NECTAR GTB1L X6 - 0846 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000644558</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000341129</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">14.19</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000051</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">34.63</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>51</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA LEMON SCAN0,33L 4X6P - 1212 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000271953</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000288653</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">17.315</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000052</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">32.51</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>52</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>FTA LEMON ZRO SCAN0,33L 4X6P - 1213 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000271948</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000289049</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">16.255</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000053</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">2</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">57.69</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>53</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>MNSTR ENERGY BLIK0,5L 6X4P - 6393 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000406674</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5060166694616</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">28.845</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+    <cac:InvoiceLine>
+        <cbc:ID>000054</cbc:ID>
+        <cbc:InvoicedQuantity unitCode="EA">5</cbc:InvoicedQuantity>
+        <cbc:LineExtensionAmount currencyID="EUR">76.29</cbc:LineExtensionAmount>
+        <cac:OrderLineReference>
+            <cbc:LineID>54</cbc:LineID>
+        </cac:OrderLineReference>
+        <cac:Item>
+            <cbc:Name>CZ NO CAF SCAN0,33L 4X6P - 7049 0000 BE</cbc:Name>
+            <cac:SellersItemIdentification>
+                <cbc:ID>000000000000283968</cbc:ID>
+            </cac:SellersItemIdentification>
+            <cac:StandardItemIdentification>
+                <cbc:ID schemeID="0160">5449000304339</cbc:ID>
+            </cac:StandardItemIdentification>
+            <cac:ClassifiedTaxCategory>
+                <cbc:ID>S</cbc:ID>
+                <cbc:Percent>6</cbc:Percent>
+                <cac:TaxScheme>
+                    <cbc:ID>VAT</cbc:ID>
+                </cac:TaxScheme>
+            </cac:ClassifiedTaxCategory>
+        </cac:Item>
+        <cac:Price>
+            <cbc:PriceAmount currencyID="EUR">15.258</cbc:PriceAmount>
+        </cac:Price>
+    </cac:InvoiceLine>
+</ubl:Invoice>
