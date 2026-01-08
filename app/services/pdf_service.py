@@ -27,7 +27,7 @@ CACHE_LOCK = threading.Lock()
 
 def initialize_saxon():
     """Initializes the Saxon Processor and compiles stylesheets."""
-    global SAXON_PROC, XSLT_CACHE
+    global SAXON_PROC
     print("Initializing Saxon Processor...")
     try:
         SAXON_PROC = PySaxonProcessor(license=False)
