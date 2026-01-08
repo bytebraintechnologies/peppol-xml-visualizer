@@ -12,6 +12,11 @@ from fastapi import HTTPException
 
 from app.services.peppol_service import PeppolExtractor
 from app.services.qr_service import SepaQrService
+from pypdf import PdfReader, PdfWriter
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm
+import io
 
 from app.core.config import XSLT_INVOICE, XSLT_CREDITNOTE, EDGE_PATH
 
@@ -118,7 +123,8 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
         "X-Cache-Hit": "True"
     }
 
-def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en") -> tuple[bytes, dict]:
+
+def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None) -> tuple[bytes, dict]:
     """
     Transforms XML to PDF.
     Returns (pdf_bytes, metrics_dict).
@@ -133,6 +139,11 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en") -> tuple[
         raise HTTPException(status_code=500, detail="Saxon Processor not initialized.")
 
     doc_type = get_xml_type(xml_path)
+    
+    # Transform XML to HTML
+    metrics_xslt = transform_xml_to_html(xml_path, html_path, lang)
+    
+    start_pdf = time.time()
     executable = XSLT_CACHE.get(doc_type) or XSLT_CACHE.get('Invoice')
 
     if not executable and doc_type == "CreditNote":
@@ -156,28 +167,37 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en") -> tuple[
     else:
         file_url = f"file://{abs_html_file_path}"
 
-    cmd_pdf = [
+    # Edge PDF generation - Generate CLEAN pdf with NO header/footer
+    # We will add page numbers via post-processing to ensure 100% reliability.
+    cmd_parts = [
         EDGE_PATH,
         "--headless",
         "--disable-gpu",
-        "--run-all-compositor-stages-before-draw",
+        "--no-sandbox",
         "--no-pdf-header-footer",
         f"--print-to-pdf={pdf_path}",
         file_url
     ]
     
-    if platform.system() == "Linux":
-        cmd_pdf.insert(1, "--no-sandbox")
+    # On Linux, subprocess.run(list) is safer and handles quoting automatically.
+    # On Windows, list args also mostly work but we previously had issues with templates.
+    # Since we REMOVED the complex templates and are just doing a clean print,
+    # list args should work fine everywhere now.
+
+    print(f"Generating clean PDF with command: {cmd_parts}")
 
     try:
-        subprocess.run(cmd_pdf, check=True, capture_output=True)
+        subprocess.run(cmd_parts, check=True)
+        print(f"Clean PDF generated successfully at {pdf_path}")
+        
+        # Apply page numbering overlay and optional watermark
+        post_process_pdf(pdf_path, watermark_text=watermark)
+        print(f"Post-processing applied to {pdf_path}")
+        
     except subprocess.CalledProcessError as e:
-            err_msg = e.stderr.decode('utf-8', errors='ignore')
-            print(f"Edge PDF Error: {err_msg}")
-            raise HTTPException(status_code=500, detail=f"PDF conversion failed: {err_msg}")
-    except Exception as e:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
+        print(f"PDF generation failed: {e}")
+        raise HTTPException(status_code=500, detail=f"PDF conversion failed: {str(e)}")
+
 
     if not os.path.exists(pdf_path):
         raise HTTPException(status_code=500, detail="PDF file was not created by Edge.")
@@ -186,11 +206,77 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en") -> tuple[
     time_total = time.time() - start_total
 
     metrics = {
-        "X-Perf-Xslt-Sec": f"{time_xslt:.4f}",
+        "X-Perf-Xslt-Sec": metrics_xslt.get("X-Perf-Xslt-Sec", "0.0000"),
         "X-Perf-Pdf-Sec": f"{time_pdf:.4f}",
         "X-Perf-Total-Sec": f"{time_total:.4f}",
         "X-Cache-Hit": "True"
     }
 
-    with open(pdf_path, "rb") as pdf_file:
-        return pdf_file.read(), metrics
+    with open(pdf_path, "rb") as f:
+        pdf_bytes = f.read()
+
+    return pdf_bytes, metrics
+
+def post_process_pdf(pdf_path, watermark_text=None):
+    """
+    Overlays page numbers (1 / N) and optional watermark onto the PDF using ReportLab and pypdf.
+    This bypasses browser inconsistencies.
+    """
+    try:
+        # Create a temp file for the output
+        temp_output = pdf_path.replace(".pdf", "_processed.pdf")
+        
+        reader = PdfReader(pdf_path)
+        writer = PdfWriter()
+        total_pages = len(reader.pages)
+        
+        for i, page in enumerate(reader.pages):
+            page_number = i + 1
+            
+            # Create a memory buffer for the overlay (numbering + watermark)
+            packet = io.BytesIO()
+            # Use A4 size; invoice is A4.
+            can = canvas.Canvas(packet, pagesize=A4)
+            
+            # 1. Page Numbering
+            # Styling: Grey, small font, bottom right
+            text = f"{page_number} / {total_pages}"
+            can.setFont("Helvetica", 9)
+            can.setFillColorRGB(0.6, 0.6, 0.6)
+            
+            # Position: 20mm from right, 12mm from bottom (footer area)
+            text_width = can.stringWidth(text, "Helvetica", 9)
+            x_pos = (210 * mm) - (20 * mm) - text_width
+            y_pos = 12 * mm
+            can.drawString(x_pos, y_pos, text)
+
+            # 2. Optional Watermark
+            if watermark_text:
+                can.saveState()
+                can.translate(105 * mm, 148.5 * mm) # Move to center of A4
+                can.rotate(45)
+                can.setFont("Helvetica-Bold", 60)
+                # Light grey, semi-transparent
+                can.setFillColorRGB(0.85, 0.85, 0.85, alpha=0.5)
+                # Draw centered
+                w_width = can.stringWidth(watermark_text, "Helvetica-Bold", 60)
+                can.drawString(-w_width / 2, 0, watermark_text)
+                can.restoreState()
+
+            can.save()
+            
+            packet.seek(0)
+            overlay_pdf = PdfReader(packet)
+            
+            # Merge overlay onto the original page
+            page.merge_page(overlay_pdf.pages[0])
+            writer.add_page(page)
+            
+        # Overwrite the original file with the processed version
+        with open(pdf_path, "wb") as f:
+            writer.write(f)
+            
+    except Exception as e:
+        print(f"Error applying post-processing: {e}")
+        traceback.print_exc()
+        # Non-fatal: if failing, return the clean PDF

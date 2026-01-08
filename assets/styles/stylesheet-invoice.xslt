@@ -115,18 +115,17 @@
                     line-height: 1.5;
                     margin: 0;
                     padding: 0;
-                    background-color: #f9f9f9;
+                    background-color: #fff;
                     -webkit-print-color-adjust: exact;
                     print-color-adjust: exact;
                 }
-                @page { size: A4; margin: 0; }
+                @page { 
+                    size: A4; 
+                    margin: 20mm; 
+                }
                 .invoice-container {
-                    width: 210mm;
-                    min-height: 297mm;
-                    margin: 0 auto;
                     background: #fff;
-                    padding: 20mm;
-                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    width: 100%;
                 }
                 h1, h2, h3, h4, h5 { margin: 0; color: #1a2b3c; }
                 h1 { font-size: 24pt; text-align: right; margin-bottom: 20px; text-transform: uppercase; }

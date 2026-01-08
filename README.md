@@ -79,11 +79,17 @@ Built with **FastAPI**, **SaxonC** (for XSLT 3.0), and **Microsoft Edge** (for h
 ### Endpoints
 
 #### `POST /render`
+#### `POST /render`
 Upload an XML file to convert it.
+
+**Query Parameters**:
+*   `lang`: (Optional) Language code (`en`, `fr`, `nl`, `de`). Default: `en`.
+*   `watermark`: (Optional) Text to overlay as a watermark on the center of each page (e.g., `DUPLICATE`, `COPY`).
+
 
 **Curl Example**:
 ```bash
-curl -X POST "http://localhost:8000/render?lang=en" \
+curl -X POST "http://localhost:8000/render?lang=en&watermark=DUPLICATE" \
      -H "accept: application/pdf" \
      -F "file=@path/to/invoice.xml" --output result.pdf
 ```

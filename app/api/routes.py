@@ -14,6 +14,7 @@ router = APIRouter()
 async def convert_xml_to_pdf(
     file: UploadFile = File(...), 
     lang: str = Query("en", description="Language code (en, fr, nl, de)"),
+    watermark: str = Query(None, description="Watermark text to overlay on the PDF"),
     accept: str = Header(default="application/pdf")
 ):
     """
@@ -39,7 +40,7 @@ async def convert_xml_to_pdf(
             return Response(content=html_bytes, media_type="text/html", headers=metrics)
 
         # Default: Generate PDF
-        pdf_bytes, metrics = process_xml_to_pdf(xml_path, temp_dir, lang)
+        pdf_bytes, metrics = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark)
         
         if "application/json" in accept:
             pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
