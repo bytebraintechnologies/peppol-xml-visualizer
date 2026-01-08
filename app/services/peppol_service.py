@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import base64
 
 class PeppolExtractor:
     """Service to extract domain data from Peppol UBL documents."""
@@ -67,3 +68,44 @@ class PeppolExtractor:
         except Exception as e:
             print(f"Error extracting SEPA data: {e}")
             return {}
+
+    @staticmethod
+    def extract_attachments(xml_path: str) -> list[bytes]:
+        """
+        Extracts embedded PDF attachments from the XML.
+        Looking for:
+        cac:AdditionalDocumentReference
+          cac:Attachment
+            cbc:EmbeddedDocumentBinaryObject mimeCode="application/pdf"
+        """
+        attachments = []
+        try:
+            tree = ET.parse(xml_path)
+            root = tree.getroot()
+            
+            # Namespace agnostic search or local-name check
+            for elem in root.iter():
+                if elem.tag.split('}')[-1] == "AdditionalDocumentReference":
+                    # Check children for Attachment
+                    attachment_node = None
+                    for child in elem:
+                        if child.tag.split('}')[-1] == "Attachment":
+                            attachment_node = child
+                            break
+                    
+                    if attachment_node is not None:
+                        # Check for EmbeddedDocumentBinaryObject
+                        for bin_obj in attachment_node:
+                            if bin_obj.tag.split('}')[-1] == "EmbeddedDocumentBinaryObject":
+                                mime = bin_obj.attrib.get("mimeCode", "").lower()
+                                if mime == "application/pdf" and bin_obj.text:
+                                    try:
+                                        # Decode base64
+                                        pdf_bytes = base64.b64decode(bin_obj.text.strip())
+                                        attachments.append(pdf_bytes)
+                                    except Exception as e:
+                                        print(f"Failed to decode attachment: {e}")
+        except Exception as e:
+            print(f"Error extracting attachments: {e}")
+            
+        return attachments

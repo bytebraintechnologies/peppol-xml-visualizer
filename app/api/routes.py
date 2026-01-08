@@ -15,6 +15,7 @@ async def convert_xml_to_pdf(
     file: UploadFile = File(...), 
     lang: str = Query("en", description="Language code (en, fr, nl, de)"),
     watermark: str = Query(None, description="Watermark text to overlay on the PDF"),
+    merge_attachments: bool = Query(False, description="Whether to merge embedded PDF attachments from the XML"),
     accept: str = Header(default="application/pdf")
 ):
     """
@@ -40,7 +41,7 @@ async def convert_xml_to_pdf(
             return Response(content=html_bytes, media_type="text/html", headers=metrics)
 
         # Default: Generate PDF
-        pdf_bytes, metrics = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark)
+        pdf_bytes, metrics = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark, merge_attachments=merge_attachments)
         
         if "application/json" in accept:
             pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')

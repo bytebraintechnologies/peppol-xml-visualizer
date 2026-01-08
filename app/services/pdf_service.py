@@ -124,7 +124,7 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
     }
 
 
-def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None) -> tuple[bytes, dict]:
+def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None, merge_attachments: bool = False) -> tuple[bytes, dict]:
     """
     Transforms XML to PDF.
     Returns (pdf_bytes, metrics_dict).
@@ -142,6 +142,11 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
     
     # Transform XML to HTML
     metrics_xslt = transform_xml_to_html(xml_path, html_path, lang)
+    
+    # Extract attachments (if any)
+    attachments = []
+    if merge_attachments:
+        attachments = PeppolExtractor.extract_attachments(xml_path)
     
     start_pdf = time.time()
     executable = XSLT_CACHE.get(doc_type) or XSLT_CACHE.get('Invoice')
@@ -191,7 +196,7 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
         print(f"Clean PDF generated successfully at {pdf_path}")
         
         # Apply page numbering overlay and optional watermark
-        post_process_pdf(pdf_path, watermark_text=watermark)
+        post_process_pdf(pdf_path, watermark_text=watermark, attachments=attachments)
         print(f"Post-processing applied to {pdf_path}")
         
     except subprocess.CalledProcessError as e:
@@ -217,25 +222,37 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
 
     return pdf_bytes, metrics
 
-def post_process_pdf(pdf_path, watermark_text=None):
+def post_process_pdf(pdf_path, watermark_text=None, attachments: list[bytes] = None):
     """
-    Overlays page numbers (1 / N) and optional watermark onto the PDF using ReportLab and pypdf.
-    This bypasses browser inconsistencies.
+    Overlays page numbers (1 / N) and optional watermark onto the PDF.
+    Also merges any attachments found in the XML.
     """
     try:
-        # Create a temp file for the output
-        temp_output = pdf_path.replace(".pdf", "_processed.pdf")
-        
+        # Load main generated PDF
         reader = PdfReader(pdf_path)
-        writer = PdfWriter()
-        total_pages = len(reader.pages)
+        all_pages = []
+        all_pages.extend(reader.pages)
         
-        for i, page in enumerate(reader.pages):
+        # Load and append attachments
+        if attachments:
+            for att_bytes in attachments:
+                try:
+                    att_reader = PdfReader(io.BytesIO(att_bytes))
+                    all_pages.extend(att_reader.pages)
+                except Exception as e:
+                    print(f"Skipping invalid attachment: {e}")
+
+        writer = PdfWriter()
+        total_pages = len(all_pages)
+        
+        for i, page in enumerate(all_pages):
             page_number = i + 1
             
             # Create a memory buffer for the overlay (numbering + watermark)
             packet = io.BytesIO()
-            # Use A4 size; invoice is A4.
+            # Use A4 size; invoice is usually A4.
+            # Note: If attachment is different size, this overlay might be misaligned, 
+            # but for now assume A4 or standard behavior.
             can = canvas.Canvas(packet, pagesize=A4)
             
             # 1. Page Numbering
@@ -269,14 +286,19 @@ def post_process_pdf(pdf_path, watermark_text=None):
             overlay_pdf = PdfReader(packet)
             
             # Merge overlay onto the original page
+            # Note: page.merge_page modifies the page object in place
             page.merge_page(overlay_pdf.pages[0])
             writer.add_page(page)
             
-        # Overwrite the original file with the processed version
-        with open(pdf_path, "wb") as f:
+        # Write to a temporary file first to avoid corruption (reading/writing same file)
+        temp_final_path = pdf_path.replace(".pdf", "_final.pdf")
+        with open(temp_final_path, "wb") as f:
             writer.write(f)
+            
+        # Replace original
+        os.replace(temp_final_path, pdf_path)
             
     except Exception as e:
         print(f"Error applying post-processing: {e}")
         traceback.print_exc()
-        # Non-fatal: if failing, return the clean PDF
+        # Non-fatal: if failing, return the clean (but unmerged) PDF

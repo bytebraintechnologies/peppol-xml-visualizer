@@ -84,7 +84,8 @@ Upload an XML file to convert it.
 
 **Query Parameters**:
 *   `lang`: (Optional) Language code (`en`, `fr`, `nl`, `de`). Default: `en`.
-*   `watermark`: (Optional) Text to overlay as a watermark on the center of each page (e.g., `DUPLICATE`, `COPY`).
+*   `watermark`: (Optional) Text to overlay on the center of each page (e.g., `DUPLICATE`).
+*   `merge_attachments`: (Optional) Boolean (true/false). Whether to append embedded PDF attachments found in the XML to the output. Default: `false`.
 
 
 **Curl Example**:
