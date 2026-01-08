@@ -6,4 +6,5 @@ python-dotenv==1.0.0
 paramiko==3.4.0
 scp==0.14.5
 saxonche==12.9.0
-
+qrcode==8.2
+Pillow==11.1.0

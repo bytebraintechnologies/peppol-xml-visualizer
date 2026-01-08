@@ -10,6 +10,7 @@
 
     <!-- Language Parameter -->
     <xsl:param name="lang" select="'en'"/>
+    <xsl:param name="sepa_qr_b64" select="''"/>
 
     <!-- Translations Map -->
     <xsl:variable name="i18n">
@@ -81,6 +82,18 @@
         </entry>
         <entry key="company_id">
             <en>Company ID</en><fr>BCE</fr><nl>KBO</nl><de>U-Nummer</de>
+        </entry>
+        <entry key="qr_instruction">
+            <en>Scan this QR code with your banking app to pay this invoice easily.</en>
+            <fr>Scannez ce code QR avec votre application bancaire pour payer cette facture facilement.</fr>
+            <nl>Scan deze QR-code met uw bankapp om deze factuur eenvoudig te betalen.</nl>
+            <de>Scannen Sie diesen QR-Code mit Ihrer Bank-App, um diese Rechnung einfach zu bezahlen.</de>
+        </entry>
+        <entry key="qr_disclaimer">
+            <en>Please verify payment details and invoice before executing payment.</en>
+            <fr>Veuillez vérifier les détails du paiement et la facture avant d'effectuer le paiement.</fr>
+            <nl>Controleer de betalingsgegevens en de factuur voordat u de betaling uitvoert.</nl>
+            <de>Bitte überprüfen Sie die Zahlungsdetails und die Rechnung, bevor Sie die Zahlung ausführen.</de>
         </entry>
     </xsl:variable>
 
@@ -312,6 +325,22 @@
                                     </tr>
                                 </xsl:if>
                             </table>
+                            <xsl:if test="$sepa_qr_b64 != ''">
+                                <div style="margin-top: 20px; display: flex; align-items: flex-start; gap: 15px;">
+                                    <img src="{$sepa_qr_b64}" style="width: 100px; height: 100px;"/>
+                                    <div style="font-size: 0.8em; color: #666; max-width: 200px; line-height: 1.4;">
+                                        <xsl:variable name="instr" select="$i18n/entry[@key='qr_instruction']/*[local-name()=$lang]"/>
+                                        <xsl:variable name="disc" select="$i18n/entry[@key='qr_disclaimer']/*[local-name()=$lang]"/>
+                                        
+                                        <div style="margin-bottom: 4px;">
+                                            <xsl:value-of select="if ($instr != '') then $instr else 'Scan this QR code with your banking app to pay this invoice easily.'"/>
+                                        </div>
+                                        <div style="font-weight: 600; font-size: 0.9em; color: #333;">
+                                            <xsl:value-of select="if ($disc != '') then $disc else 'Please verify payment details and invoice before executing payment.'"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </xsl:if>
                         </div>
                     </xsl:if>
                      <xsl:for-each select="*:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason">

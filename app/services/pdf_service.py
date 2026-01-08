@@ -10,6 +10,9 @@ import xml.etree.ElementTree as ET
 from saxonche import PySaxonProcessor
 from fastapi import HTTPException
 
+from app.services.peppol_service import PeppolExtractor
+from app.services.qr_service import SepaQrService
+
 from app.core.config import XSLT_INVOICE, XSLT_CREDITNOTE, EDGE_PATH
 
 # Global State
@@ -64,6 +67,7 @@ def get_xml_type(xml_path: str) -> str:
         print(f"Error checking XML type: {e}")
     return "Invoice"
 
+
 def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> dict:
     """
     Performs XSLT transformation only.
@@ -84,8 +88,21 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
         raise HTTPException(status_code=500, detail=f"XSLT for {doc_type} is not cached or available.")
 
     try:
+        lang_code = (lang or "en").lower()
+        # Generate SEPA QR if applicable
+        sepa_qr_b64 = ""
+        if doc_type in ["Invoice", "CreditNote"]:
+            data = PeppolExtractor.extract_sepa_data(xml_path)
+            try:
+                sepa_qr_b64 = SepaQrService.generate_from_peppol_data(doc_type, data)
+                print(f"SEPA QR generated: {len(sepa_qr_b64)} chars")
+            except Exception as qr_err:
+                print(f"Warning: Failed to generate SEPA QR: {qr_err}")
+
         with CACHE_LOCK:
-            executable.set_parameter("lang", SAXON_PROC.make_string_value(lang))
+            print(f"Setting XSLT parameter 'lang': {lang_code}")
+            executable.set_parameter("lang", SAXON_PROC.make_string_value(lang_code))
+            executable.set_parameter("sepa_qr_b64", SAXON_PROC.make_string_value(sepa_qr_b64))
             executable.transform_to_file(source_file=xml_path, output_file=output_path)
             
         if not os.path.exists(output_path):

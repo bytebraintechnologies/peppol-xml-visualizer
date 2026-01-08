@@ -21,6 +21,11 @@ Built with **FastAPI**, **SaxonC** (for XSLT 3.0), and **Microsoft Edge** (for h
 *   **Flexible Deployment**:
     *   Dockerized for easy deployment anywhere.
     *   Includes scripts for Azure VM deployment with Caddy reverse proxy for HTTPS.
+*   **SEPA QR Code Integration**:
+    *   Generates EPC-compliant SEPA QR codes (v002) for instant mobile payments.
+    *   Automatically extracts payment details (IBAN, BIC, Amount, Reference) from Peppol XML.
+    *   Supports Belgian structured communication (`+++...+++`) mapping.
+    *   Localizable instructions and payment disclaimers (EN, FR, NL, DE).
 *   **Localized**:
     *   Built-in support for multiple languages (EN, FR, NL, DE).
 
