@@ -120,14 +120,15 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
     time_xslt = time.time() - start_xslt
     return {
         "X-Perf-Xslt-Sec": f"{time_xslt:.4f}",
-        "X-Cache-Hit": "True"
+        "X-Cache-Hit": "True",
+        "sepa_qr_b64": sepa_qr_b64
     }
 
 
-def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None, merge_attachments: bool = False) -> tuple[bytes, dict]:
+def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None, merge_attachments: bool = False) -> tuple[bytes, dict, str]:
     """
     Transforms XML to PDF.
-    Returns (pdf_bytes, metrics_dict).
+    Returns (pdf_bytes, metrics_dict, sepa_qr_b64).
     """
     unique_id = str(uuid.uuid4())
     html_path = os.path.join(temp_dir, f"{unique_id}.html")
@@ -141,26 +142,14 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
     doc_type = get_xml_type(xml_path)
     
     # Transform XML to HTML
-    metrics_xslt = transform_xml_to_html(xml_path, html_path, lang)
+    metrics = transform_xml_to_html(xml_path, html_path, lang)
+    sepa_qr_b64 = metrics.pop("sepa_qr_b64", "")
     
     # Extract attachments (if any)
     attachments = []
     if merge_attachments:
         attachments = PeppolExtractor.extract_attachments(xml_path)
     
-    start_pdf = time.time()
-    executable = XSLT_CACHE.get(doc_type) or XSLT_CACHE.get('Invoice')
-
-    if not executable and doc_type == "CreditNote":
-        executable = XSLT_CACHE.get('Invoice')
-
-    if not executable:
-        raise HTTPException(status_code=500, detail=f"XSLT for {doc_type} is not cached or available.")
-
-    # 1. XSLT Transformation
-    metrics = transform_xml_to_html(xml_path, html_path, lang)
-    time_xslt = float(metrics["X-Perf-Xslt-Sec"])
-
     # 2. PDF Conversion
     start_pdf = time.time()
     abs_html_file_path = os.path.abspath(html_path)
@@ -210,17 +199,16 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
     time_pdf = time.time() - start_pdf
     time_total = time.time() - start_total
 
-    metrics = {
-        "X-Perf-Xslt-Sec": metrics_xslt.get("X-Perf-Xslt-Sec", "0.0000"),
+    metrics.update({
         "X-Perf-Pdf-Sec": f"{time_pdf:.4f}",
         "X-Perf-Total-Sec": f"{time_total:.4f}",
         "X-Cache-Hit": "True"
-    }
+    })
 
     with open(pdf_path, "rb") as f:
         pdf_bytes = f.read()
 
-    return pdf_bytes, metrics
+    return pdf_bytes, metrics, sepa_qr_b64
 
 def post_process_pdf(pdf_path, watermark_text=None, attachments: list[bytes] = None):
     """

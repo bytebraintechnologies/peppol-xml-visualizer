@@ -36,22 +36,31 @@ async def convert_xml_to_pdf(
         if "text/html" in accept:
             html_path = os.path.join(temp_dir, f"output_{uuid.uuid4()}.html")
             metrics = transform_xml_to_html(xml_path, html_path, lang)
+            # Remove large data not meant for headers
+            metrics.pop("sepa_qr_b64", None)
+            
             with open(html_path, "rb") as f:
                 html_bytes = f.read()
             return Response(content=html_bytes, media_type="text/html", headers=metrics)
 
         # Default: Generate PDF
-        pdf_bytes, metrics = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark, merge_attachments=merge_attachments)
+        pdf_bytes, metrics, qr_code = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark, merge_attachments=merge_attachments)
         
         if "application/json" in accept:
-            pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
-            return JSONResponse(content={"pdf_base64": pdf_b64}, headers=metrics)
+            pdf_b64_str = base64.b64encode(pdf_bytes).decode('utf-8')
+            pdf_b64 = f"data:application/pdf;base64,{pdf_b64_str}"
+            content = {"pdf_base64": pdf_b64}
+            if qr_code:
+                content["qr_code_base64"] = qr_code
+            return JSONResponse(content=content, headers=metrics)
         
         if "application/xml" in accept:
             pdf_b64 = base64.b64encode(pdf_bytes).decode('utf-8')
+            qr_tag = f"<qr_code_base64>{qr_code}</qr_code_base64>" if qr_code else ""
             xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <response>
     <pdf_base64>{pdf_b64}</pdf_base64>
+    {qr_tag}
 </response>"""
             return Response(content=xml_content, media_type="application/xml", headers=metrics)
             
