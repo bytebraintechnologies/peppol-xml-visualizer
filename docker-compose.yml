@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/project/app
+      - ./assets:/project/assets
+    environment:
+      - PORT=8000
+    shm_size: '2gb'
+    restart: always

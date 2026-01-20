@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     apt-transport-https \
     curl \
+    tini \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Install Microsoft Edge (Stable)
@@ -36,4 +37,5 @@ ENV EDGE_BIN=/usr/bin/microsoft-edge-stable
 ENV PYTHONPATH=/project
 
 # 6. Run
+ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["python", "app/main.py"]
