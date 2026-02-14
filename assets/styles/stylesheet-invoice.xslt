@@ -50,6 +50,9 @@
         <entry key="price_col">
             <en>Unit Price</en><fr>Prix Unitaire</fr><nl>Eenheidsprijs</nl><de>Einzelpreis</de>
         </entry>
+        <entry key="tax_col">
+            <en>Tax</en><fr>TVA</fr><nl>BTW</nl><de>MwSt.</de>
+        </entry>
         <entry key="total_col">
             <en>Total</en><fr>Total</fr><nl>Totaal</nl><de>Gesamt</de>
         </entry>
@@ -244,6 +247,7 @@
                             <th style="width: 50%"><xsl:value-of select="$i18n/entry[@key='description_col']/*[local-name()=$lang]"/></th>
                             <th class="text-right"><xsl:value-of select="$i18n/entry[@key='quantity_col']/*[local-name()=$lang]"/></th>
                             <th class="text-right"><xsl:value-of select="$i18n/entry[@key='price_col']/*[local-name()=$lang]"/></th>
+                            <th class="text-right"><xsl:value-of select="$i18n/entry[@key='tax_col']/*[local-name()=$lang]"/></th>
                             <th class="text-right"><xsl:value-of select="$i18n/entry[@key='total_col']/*[local-name()=$lang]"/></th>
                         </tr>
                     </thead>
@@ -406,6 +410,9 @@
                 <xsl:value-of select="format-number(cac:Price/cbc:PriceAmount, '#.00')"/> 
                 <xsl:text> </xsl:text>
                 <xsl:value-of select="cac:Price/cbc:PriceAmount/@currencyID"/>
+            </td>
+            <td class="text-right">
+                <xsl:value-of select="cac:Item/cac:ClassifiedTaxCategory/cbc:Percent"/>%
             </td>
             <td class="text-right">
                 <xsl:value-of select="format-number(cbc:LineExtensionAmount, '#.00')"/>
