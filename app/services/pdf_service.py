@@ -96,13 +96,19 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
         lang_code = (lang or "en").lower()
         # Generate SEPA QR if applicable
         sepa_qr_b64 = ""
+        # Payment means codes where payment is already handled (no action needed from recipient)
+        # 49 = direct debit, 59 = SEPA direct debit (UNCL4461)
+        SELF_PAYING_CODES = {"49", "59"}
         if doc_type in ["Invoice", "CreditNote"]:
             data = PeppolExtractor.extract_sepa_data(xml_path)
-            try:
-                sepa_qr_b64 = SepaQrService.generate_from_peppol_data(doc_type, data)
-                print(f"SEPA QR generated: {len(sepa_qr_b64)} chars")
-            except Exception as qr_err:
-                print(f"Warning: Failed to generate SEPA QR: {qr_err}")
+            if data.get("payment_means_code") in SELF_PAYING_CODES:
+                print(f"Skipping SEPA QR: payment means code {data['payment_means_code']} (direct debit)")
+            else:
+                try:
+                    sepa_qr_b64 = SepaQrService.generate_from_peppol_data(doc_type, data)
+                    print(f"SEPA QR generated: {len(sepa_qr_b64)} chars")
+                except Exception as qr_err:
+                    print(f"Warning: Failed to generate SEPA QR: {qr_err}")
 
         with CACHE_LOCK:
             print(f"Setting XSLT parameter 'lang': {lang_code}")

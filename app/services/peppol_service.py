@@ -22,13 +22,16 @@ class PeppolExtractor:
             iban = ""
             bic = ""
             
+            payment_means_code = ""
             for pm in root.iter():
                 local_tag = pm.tag.split('}')[-1]
                 if local_tag == "PaymentMeans":
                     for child in pm.iter():
-                        if child.tag.split('}')[-1] == "PaymentID":
+                        child_tag = child.tag.split('}')[-1]
+                        if child_tag == "PaymentMeansCode" and not payment_means_code:
+                            payment_means_code = (child.text or "").strip()
+                        elif child_tag == "PaymentID" and not payment_id:
                             payment_id = child.text
-                            break
                 elif local_tag == "PayeeFinancialAccount":
                     for child in pm.iter():
                         if child.tag.split('}')[-1] == "ID":
@@ -63,7 +66,8 @@ class PeppolExtractor:
                 "amount": amount,
                 "currency": find_val("DocumentCurrencyCode") or "EUR",
                 "reference": payment_id,
-                "doc_id": doc_id
+                "doc_id": doc_id,
+                "payment_means_code": payment_means_code
             }
         except Exception as e:
             print(f"Error extracting SEPA data: {e}")
