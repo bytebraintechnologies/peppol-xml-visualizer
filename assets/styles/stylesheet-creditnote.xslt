@@ -87,6 +87,12 @@
         <entry key="vat_id">
             <en>VAT</en><fr>n° TVA</fr><nl>BTW</nl><de>MwSt.</de>
         </entry>
+        <entry key="charge">
+            <en>Charge</en><fr>Frais</fr><nl>Toeslag</nl><de>Zuschlag</de>
+        </entry>
+        <entry key="allowance">
+            <en>Allowance</en><fr>Remise</fr><nl>Korting</nl><de>Nachlass</de>
+        </entry>
         <entry key="company_id">
             <en>Company ID</en><fr>BCE</fr><nl>KBO</nl><de>U-Nummer</de>
         </entry>
@@ -264,6 +270,39 @@
                                 <xsl:value-of select="*:CreditNote/cac:LegalMonetaryTotal/cbc:LineExtensionAmount/@currencyID"/>
                             </span>
                         </div>
+                        <xsl:for-each select="*:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator='false']">
+                            <div class="total-row">
+                                <span>
+                                    <xsl:value-of select="$i18n/entry[@key='allowance']/*[local-name()=$lang]"/>
+                                    <xsl:if test="cbc:AllowanceChargeReason">
+                                        <xsl:text> – </xsl:text>
+                                        <xsl:value-of select="cbc:AllowanceChargeReason"/>
+                                    </xsl:if>
+                                </span>
+                                <span>
+                                    <xsl:text>-</xsl:text>
+                                    <xsl:value-of select="cbc:Amount"/>
+                                    <xsl:text> </xsl:text>
+                                    <xsl:value-of select="cbc:Amount/@currencyID"/>
+                                </span>
+                            </div>
+                        </xsl:for-each>
+                        <xsl:for-each select="*:CreditNote/cac:AllowanceCharge[cbc:ChargeIndicator='true']">
+                            <div class="total-row">
+                                <span>
+                                    <xsl:value-of select="$i18n/entry[@key='charge']/*[local-name()=$lang]"/>
+                                    <xsl:if test="cbc:AllowanceChargeReason">
+                                        <xsl:text> – </xsl:text>
+                                        <xsl:value-of select="cbc:AllowanceChargeReason"/>
+                                    </xsl:if>
+                                </span>
+                                <span>
+                                    <xsl:value-of select="cbc:Amount"/>
+                                    <xsl:text> </xsl:text>
+                                    <xsl:value-of select="cbc:Amount/@currencyID"/>
+                                </span>
+                            </div>
+                        </xsl:for-each>
                         <xsl:for-each select="*:CreditNote/cac:TaxTotal/cac:TaxSubtotal">
                              <div class="total-row">
                                 <span><xsl:value-of select="$i18n/entry[@key='vat_id']/*[local-name()=$lang]"/> (<xsl:value-of select="cac:TaxCategory/cbc:Percent"/>%)</span>
@@ -274,7 +313,7 @@
                                 </span>
                             </div>
                         </xsl:for-each>
-                        
+
                         <div class="total-row final">
                             <span><xsl:value-of select="$i18n/entry[@key='total_amount']/*[local-name()=$lang]"/></span>
                             <span>
