@@ -17,6 +17,21 @@
         <entry key="title">
             <en>Invoice</en><fr>Facture</fr><nl>Factuur</nl><de>Rechnung</de>
         </entry>
+        <entry key="title_self_billing">
+            <en>Self-Billing Invoice</en><fr>Autofacture</fr><nl>Self-billing factuur</nl><de>Gutschrift (Selbstfakturierung)</de>
+        </entry>
+        <entry key="self_billing_notice">
+            <en>Self-billing: this invoice is issued by the customer in the name and on behalf of the supplier.</en>
+            <fr>Autofacturation : cette facture est émise par le client au nom et pour le compte du fournisseur.</fr>
+            <nl>Self-billing: deze factuur wordt uitgereikt door de afnemer in naam en voor rekening van de leverancier.</nl>
+            <de>Gutschrift: Diese Rechnung wird vom Leistungsempfänger im Namen und für Rechnung des Lieferanten ausgestellt.</de>
+        </entry>
+        <entry key="supplier_label">
+            <en>Supplier</en><fr>Fournisseur</fr><nl>Leverancier</nl><de>Lieferant</de>
+        </entry>
+        <entry key="issuer_label">
+            <en>Customer (issuer)</en><fr>Client (émetteur)</fr><nl>Afnemer (uitreiker)</nl><de>Kunde (Aussteller)</de>
+        </entry>
         <entry key="number">
             <en>Number</en><fr>Numéro</fr><nl>Nummer</nl><de>Nummer</de>
         </entry>
@@ -106,12 +121,16 @@
         </entry>
     </xsl:variable>
 
+    <!-- Peppol BIS Self-Billing 3.0: type code 389 or selfbilling customization -->
+    <xsl:variable name="is_self_billing" select="*:Invoice/cbc:InvoiceTypeCode = '389' or contains(*:Invoice/cbc:CustomizationID, 'selfbilling')"/>
+    <xsl:variable name="title" select="if ($is_self_billing) then $i18n/entry[@key='title_self_billing']/*[local-name()=$lang] else $i18n/entry[@key='title']/*[local-name()=$lang]"/>
+
     <!-- Main Template -->
     <xsl:template match="/">
         <html>
         <head>
             <title>
-                <xsl:value-of select="$i18n/entry[@key='title']/*[local-name()=$lang]"/>
+                <xsl:value-of select="$title"/>
                 <xsl:text> </xsl:text>
                 <xsl:value-of select="*:Invoice/cbc:ID"/>
             </title>
@@ -171,6 +190,8 @@
                 .footer-section { margin-top: 40px; font-size: 9pt; color: #4a5568; page-break-inside: avoid; }
                 .footer-block { margin-bottom: 12px; }
                 .footer-title { font-weight: bold; margin-bottom: 2px; color: #2d3748; }
+                .self-billing-notice { border-left: 3px solid #1a2b3c; background-color: #f5f7f9 !important; padding: 8px 12px; margin-bottom: 30px; font-size: 10pt; font-weight: 600; color: #1a2b3c; }
+                .party-role { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.05em; color: #718096; margin-bottom: 4px; }
                 @media print {
                     body { background: none; }
                     .invoice-container { width: 100%; margin: 0; padding: 0; box-shadow: none; border: none; }
@@ -186,7 +207,7 @@
                         <xsl:apply-templates select="*:Invoice/cac:AccountingSupplierParty" mode="supplier"/>
                     </div>
                     <div class="right-col" style="width: 40%; display: flex; flex-direction: column; align-items: flex-end;">
-                        <h1><xsl:value-of select="$i18n/entry[@key='title']/*[local-name()=$lang]"/></h1>
+                        <h1><xsl:value-of select="$title"/></h1>
                         <div class="invoice-details-box">
                             <div class="kv-table">
                                 <div class="kv-row">
@@ -213,6 +234,10 @@
                         </div>
                     </div>
                 </div>
+
+                <xsl:if test="$is_self_billing">
+                    <div class="self-billing-notice"><xsl:value-of select="$i18n/entry[@key='self_billing_notice']/*[local-name()=$lang]"/></div>
+                </xsl:if>
 
                 <!-- Customer & Delivery -->
                 <div class="mid-section">
@@ -398,6 +423,9 @@
     </xsl:template>
 
     <xsl:template match="cac:AccountingSupplierParty" mode="supplier">
+        <xsl:if test="$is_self_billing">
+            <div class="party-role"><xsl:value-of select="$i18n/entry[@key='supplier_label']/*[local-name()=$lang]"/></div>
+        </xsl:if>
         <div class="bold-name"><xsl:value-of select="cac:Party/cac:PartyName/cbc:Name"/></div>
         <xsl:apply-templates select="cac:Party/cac:PostalAddress"/>
         <div class="detail-row"><xsl:value-of select="$i18n/entry[@key='vat_id']/*[local-name()=$lang]"/>: <xsl:value-of select="cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/></div>
@@ -407,6 +435,9 @@
     </xsl:template>
 
     <xsl:template match="cac:AccountingCustomerParty" mode="customer">
+        <xsl:if test="$is_self_billing">
+            <div class="party-role"><xsl:value-of select="$i18n/entry[@key='issuer_label']/*[local-name()=$lang]"/></div>
+        </xsl:if>
         <div class="section-label"><xsl:value-of select="cac:Party/cac:PartyName/cbc:Name"/></div>
         <xsl:if test="not(cac:Party/cac:PartyName/cbc:Name)">
              <div class="section-label"><xsl:value-of select="cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/></div>
