@@ -20,6 +20,18 @@
         <entry key="title_self_billing">
             <en>Self-Billing Invoice</en><fr>Autofacture</fr><nl>Self-billing factuur</nl><de>Gutschrift (Selbstfakturierung)</de>
         </entry>
+        <entry key="title_326">
+            <en>Partial Invoice</en><fr>Facture partielle</fr><nl>Deelfactuur</nl><de>Teilrechnung</de>
+        </entry>
+        <entry key="title_383">
+            <en>Debit Note</en><fr>Note de débit</fr><nl>Debetnota</nl><de>Belastungsanzeige</de>
+        </entry>
+        <entry key="title_384">
+            <en>Corrected Invoice</en><fr>Facture rectificative</fr><nl>Gecorrigeerde factuur</nl><de>Rechnungskorrektur</de>
+        </entry>
+        <entry key="title_386">
+            <en>Prepayment Invoice</en><fr>Facture d'acompte</fr><nl>Voorschotfactuur</nl><de>Vorauszahlungsrechnung</de>
+        </entry>
         <entry key="self_billing_notice">
             <en>Self-billing: this invoice is issued by the customer in the name and on behalf of the supplier.</en>
             <fr>Autofacturation : cette facture est émise par le client au nom et pour le compte du fournisseur.</fr>
@@ -123,7 +135,11 @@
 
     <!-- Peppol BIS Self-Billing 3.0: type code 389 or selfbilling customization -->
     <xsl:variable name="is_self_billing" select="*:Invoice/cbc:InvoiceTypeCode = '389' or contains(*:Invoice/cbc:CustomizationID, 'selfbilling')"/>
-    <xsl:variable name="title" select="if ($is_self_billing) then $i18n/entry[@key='title_self_billing']/*[local-name()=$lang] else $i18n/entry[@key='title']/*[local-name()=$lang]"/>
+    <!-- Peppol BIS Billing 3.0.21 UNCL1001 subset: codes with a distinct title; all others render as commercial invoice (380) -->
+    <xsl:variable name="type_title_key" select="concat('title_', normalize-space(*:Invoice/cbc:InvoiceTypeCode))"/>
+    <xsl:variable name="title" select="if ($is_self_billing) then $i18n/entry[@key='title_self_billing']/*[local-name()=$lang]
+                                       else if ($i18n/entry[@key=$type_title_key]) then $i18n/entry[@key=$type_title_key]/*[local-name()=$lang]
+                                       else $i18n/entry[@key='title']/*[local-name()=$lang]"/>
 
     <!-- Main Template -->
     <xsl:template match="/">
@@ -410,10 +426,16 @@
                             </xsl:if>
                         </div>
                     </xsl:if>
-                     <xsl:for-each select="*:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason">
+                     <xsl:for-each select="*:Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[cbc:TaxExemptionReason or cbc:TaxExemptionReasonCode]">
                         <div class="footer-block">
                              <div class="footer-title"><xsl:value-of select="$i18n/entry[@key='vat_info']/*[local-name()=$lang]"/></div>
-                             <div><xsl:value-of select="."/></div>
+                             <div>
+                                 <xsl:value-of select="cbc:TaxExemptionReason"/>
+                                 <xsl:if test="cbc:TaxExemptionReasonCode">
+                                     <xsl:if test="cbc:TaxExemptionReason"><xsl:text> </xsl:text></xsl:if>
+                                     <xsl:text>(</xsl:text><xsl:value-of select="cbc:TaxExemptionReasonCode"/><xsl:text>)</xsl:text>
+                                 </xsl:if>
+                             </div>
                         </div>
                      </xsl:for-each>
                 </div>

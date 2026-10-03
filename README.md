@@ -10,9 +10,11 @@ Built with **FastAPI**, **SaxonC** (for XSLT 3.0), and **Microsoft Edge** (for h
     *   Pre-compiles XSLT stylesheets on startup using `SaxonC` for near-instant transformations (<10ms).
     *   Efficient global caching of Saxon processors.
     *   Thread-safe architecture.
-*   **Support for Peppol Documents**:
+*   **Support for Peppol Documents** (Peppol BIS Billing 3.0, up to release 3.0.21 / May 2026):
     *   Invoices (`urn:oasis:names:specification:ubl:schema:xsd:Invoice-2`)
     *   Credit Notes (`urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2`)
+    *   Type-specific titles for partial (326), debit note (383), corrected (384), prepayment (386) and self-billed (389) invoices; other type codes render as commercial invoice (380).
+    *   VAT exemption reason codes (VATEX) shown alongside exemption reason text.
 *   **Multiple Output Formats**:
     *   **PDF Binary** (Default)
     *   **HTML** via `Accept: text/html` (Ultra-fast, skips PDF conversion)
