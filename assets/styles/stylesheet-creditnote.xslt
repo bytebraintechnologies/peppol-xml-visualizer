@@ -407,10 +407,16 @@
                             </xsl:if>
                         </div>
                     </xsl:if>
-                     <xsl:for-each select="*:CreditNote/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReason">
+                     <xsl:for-each select="*:CreditNote/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory[cbc:TaxExemptionReason or cbc:TaxExemptionReasonCode]">
                         <div class="footer-block">
                              <div class="footer-title"><xsl:value-of select="$i18n/entry[@key='vat_info']/*[local-name()=$lang]"/></div>
-                             <div><xsl:value-of select="."/></div>
+                             <div>
+                                 <xsl:value-of select="cbc:TaxExemptionReason"/>
+                                 <xsl:if test="cbc:TaxExemptionReasonCode">
+                                     <xsl:if test="cbc:TaxExemptionReason"><xsl:text> </xsl:text></xsl:if>
+                                     <xsl:text>(</xsl:text><xsl:value-of select="cbc:TaxExemptionReasonCode"/><xsl:text>)</xsl:text>
+                                 </xsl:if>
+                             </div>
                         </div>
                      </xsl:for-each>
                 </div>
