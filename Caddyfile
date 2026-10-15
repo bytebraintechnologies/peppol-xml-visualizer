@@ -1,4 +1,33 @@
 # Replace 'peppol-viewer.bytebraintechnologies.com' with your own domain
+
+# CORS: allow the public website to call the API directly from the browser
+(cors) {
+    @allowed header_regexp Origin ^https://(www\.)?bytebraintechnologies\.com$
+    header @allowed {
+        Access-Control-Allow-Origin "{http.request.header.Origin}"
+        Access-Control-Expose-Headers "X-Perf-Xslt-Sec, X-Perf-Pdf-Sec, X-Perf-Total-Sec, X-Cache-Hit"
+        Vary Origin
+    }
+
+    @preflight {
+        method OPTIONS
+        header_regexp Origin ^https://(www\.)?bytebraintechnologies\.com$
+    }
+    handle @preflight {
+        header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        header Access-Control-Allow-Headers "*"
+        header Access-Control-Max-Age "86400"
+        respond 204
+    }
+}
+
 peppol-viewer.bytebraintechnologies.com {
+    import cors
+    reverse_proxy peppol-app:8000
+}
+
+# Plain HTTP on port 8000 for existing API clients
+:8000 {
+    import cors
     reverse_proxy peppol-app:8000
 }
