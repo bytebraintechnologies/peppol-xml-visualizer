@@ -151,6 +151,14 @@ The API returns custom headers to help you monitor performance:
 | `X-Cache-Hit` | `True` if a pre-compiled XSLT was used from cache |
 | `X-Style` | Rendering style used (`default` or `peppol`) |
 
+### Running Tests
+
+```bash
+pip install -r requirements-dev.txt
+scripts/fetch_peppol_stylesheet.sh
+python -m pytest tests/test_styles.py
+```
+
 ## Configuration
 
 The application uses environment variables for configuration. Create a `.env` file based on `.env.example`.
