@@ -18,12 +18,18 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 import io
 
-from app.core.config import XSLT_INVOICE, XSLT_CREDITNOTE, EDGE_PATH
+from app.core.config import (
+    XSLT_INVOICE, XSLT_CREDITNOTE, XSLT_PEPPOL, EDGE_PATH, STYLES, STYLE_DEFAULT, STYLE_PEPPOL
+)
 
 # Global State
 SAXON_PROC = None
+# Compiled stylesheets keyed by (style, document type)
 XSLT_CACHE = {}
 CACHE_LOCK = threading.Lock()
+
+# The official Peppol stylesheet only renders documents whose CustomizationID starts with this
+PEPPOL_BILLING_CUSTOMIZATION = "urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0"
 
 def initialize_saxon():
     """Initializes the Saxon Processor and compiles stylesheets."""
@@ -33,16 +39,32 @@ def initialize_saxon():
         SAXON_PROC = PySaxonProcessor(license=False)
         xslt30 = SAXON_PROC.new_xslt30_processor()
         
-        if os.path.exists(XSLT_INVOICE):
-            print(f"Compiling Invoice XSLT: {XSLT_INVOICE}")
-            XSLT_CACHE['Invoice'] = xslt30.compile_stylesheet(stylesheet_file=os.path.abspath(XSLT_INVOICE))
-            
-        if os.path.exists(XSLT_CREDITNOTE):
-            print(f"Compiling CreditNote XSLT: {XSLT_CREDITNOTE}")
-            XSLT_CACHE['CreditNote'] = xslt30.compile_stylesheet(stylesheet_file=os.path.abspath(XSLT_CREDITNOTE))
-            
     except Exception as e:
-        print(f"Error initializing Saxon or compiling XSLT: {e}")
+        print(f"Error initializing Saxon: {e}")
+        return
+
+    def compile_into(style, doc_types, path):
+        if not os.path.exists(path):
+            print(f"XSLT for style '{style}' not found at {path}; style unavailable.")
+            return
+        try:
+            print(f"Compiling {style} XSLT for {'/'.join(doc_types)}: {path}")
+            executable = xslt30.compile_stylesheet(stylesheet_file=os.path.abspath(path))
+            for doc_type in doc_types:
+                XSLT_CACHE[(style, doc_type)] = executable
+        except Exception as e:
+            print(f"Error compiling {style} XSLT {path}: {e}")
+
+    compile_into(STYLE_DEFAULT, ["Invoice"], XSLT_INVOICE)
+    compile_into(STYLE_DEFAULT, ["CreditNote"], XSLT_CREDITNOTE)
+    # The official stylesheet handles both document types in a single file
+    compile_into(STYLE_PEPPOL, ["Invoice", "CreditNote"], XSLT_PEPPOL)
+
+
+def available_styles() -> dict:
+    """Returns {style: {"description": ..., "available": bool}}."""
+    loaded = {style for style, _ in XSLT_CACHE}
+    return {name: {"description": desc, "available": name in loaded} for name, desc in STYLES.items()}
 
 def release_saxon():
     """Releases Saxon resources."""
@@ -73,7 +95,49 @@ def get_xml_type(xml_path: str) -> str:
     return "Invoice"
 
 
-def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> dict:
+def get_customization_id(xml_path: str) -> str:
+    """Returns the document-level cbc:CustomizationID, or '' if absent."""
+    try:
+        for child in ET.parse(xml_path).getroot():
+            if child.tag.split('}')[-1] == "CustomizationID":
+                return (child.text or "").strip()
+    except Exception as e:
+        print(f"Error reading CustomizationID: {e}")
+    return ""
+
+
+def resolve_executable(style: str, doc_type: str, xml_path: str):
+    """Picks the compiled stylesheet for a style/document type, or raises an HTTP error."""
+    if style not in STYLES:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unknown style '{style}'. Available styles: {', '.join(STYLES)}."
+        )
+
+    if style == STYLE_PEPPOL:
+        executable = XSLT_CACHE.get((STYLE_PEPPOL, doc_type))
+        if not executable:
+            raise HTTPException(
+                status_code=503,
+                detail="The official Peppol stylesheet is not installed on this server "
+                       "(see scripts/fetch_peppol_stylesheet.sh)."
+            )
+        if not get_customization_id(xml_path).startswith(PEPPOL_BILLING_CUSTOMIZATION):
+            raise HTTPException(
+                status_code=422,
+                detail="The official Peppol stylesheet only supports Peppol BIS Billing 3.0 documents "
+                       f"(CustomizationID '{PEPPOL_BILLING_CUSTOMIZATION}'). "
+                       "Use style=default for self-billing and other customizations."
+            )
+        return executable
+
+    executable = XSLT_CACHE.get((STYLE_DEFAULT, doc_type)) or XSLT_CACHE.get((STYLE_DEFAULT, "Invoice"))
+    if not executable:
+        raise HTTPException(status_code=500, detail=f"XSLT for {doc_type} is not cached or available.")
+    return executable
+
+
+def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en", style: str = STYLE_DEFAULT) -> dict:
     """
     Performs XSLT transformation only.
     Returns metrics.
@@ -84,13 +148,7 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
         raise HTTPException(status_code=500, detail="Saxon Processor not initialized.")
 
     doc_type = get_xml_type(xml_path)
-    executable = XSLT_CACHE.get(doc_type) or XSLT_CACHE.get('Invoice')
-
-    if not executable and doc_type == "CreditNote":
-        executable = XSLT_CACHE.get('Invoice')
-
-    if not executable:
-        raise HTTPException(status_code=500, detail=f"XSLT for {doc_type} is not cached or available.")
+    executable = resolve_executable(style, doc_type, xml_path)
 
     try:
         lang_code = (lang or "en").lower()
@@ -111,14 +169,19 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
                     print(f"Warning: Failed to generate SEPA QR: {qr_err}")
 
         with CACHE_LOCK:
-            print(f"Setting XSLT parameter 'lang': {lang_code}")
-            executable.set_parameter("lang", SAXON_PROC.make_string_value(lang_code))
-            executable.set_parameter("sepa_qr_b64", SAXON_PROC.make_string_value(sepa_qr_b64))
+            if style == STYLE_DEFAULT:
+                print(f"Setting XSLT parameter 'lang': {lang_code}")
+                executable.set_parameter("lang", SAXON_PROC.make_string_value(lang_code))
+                executable.set_parameter("sepa_qr_b64", SAXON_PROC.make_string_value(sepa_qr_b64))
+            # The official Peppol stylesheet only ships English labels and has no QR slot,
+            # so its parameters are left at their defaults.
             executable.transform_to_file(source_file=xml_path, output_file=output_path)
             
         if not os.path.exists(output_path):
              raise RuntimeError("Saxon transformation completed but HTML file not found.")
 
+    except HTTPException:
+        raise
     except Exception as e:
         print(f"XSLT Error: {e}")
         raise HTTPException(status_code=500, detail=f"XSLT transformation failed: {e}")
@@ -127,11 +190,13 @@ def transform_xml_to_html(xml_path: str, output_path: str, lang: str = "en") -> 
     return {
         "X-Perf-Xslt-Sec": f"{time_xslt:.4f}",
         "X-Cache-Hit": "True",
+        "X-Style": style,
         "sepa_qr_b64": sepa_qr_b64
     }
 
 
-def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None, merge_attachments: bool = False) -> tuple[bytes, dict, str]:
+def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark: str = None, merge_attachments: bool = False,
+                       style: str = STYLE_DEFAULT) -> tuple[bytes, dict, str]:
     """
     Transforms XML to PDF.
     Returns (pdf_bytes, metrics_dict, sepa_qr_b64).
@@ -148,7 +213,7 @@ def process_xml_to_pdf(xml_path: str, temp_dir: str, lang: str = "en", watermark
     doc_type = get_xml_type(xml_path)
     
     # Transform XML to HTML
-    metrics = transform_xml_to_html(xml_path, html_path, lang)
+    metrics = transform_xml_to_html(xml_path, html_path, lang, style=style)
     sepa_qr_b64 = metrics.pop("sepa_qr_b64", "")
     
     # Extract attachments (if any)
