@@ -12,6 +12,20 @@ DEFAULT_XSLT_CREDITNOTE = os.path.join(PROJECT_ROOT, "assets", "styles", "styles
 XSLT_INVOICE = os.getenv("XSLT_INVOICE", DEFAULT_XSLT_INVOICE)
 XSLT_CREDITNOTE = os.getenv("XSLT_CREDITNOTE", DEFAULT_XSLT_CREDITNOTE)
 
+# Official OpenPeppol BIS Billing 3.0 stylesheet (one file for Invoice + CreditNote).
+# Not committed to the repo: fetched at Docker build time or via scripts/fetch_peppol_stylesheet.sh.
+# Kept outside assets/ so the docker-compose assets volume mount does not hide it.
+DEFAULT_XSLT_PEPPOL = os.path.join(PROJECT_ROOT, "vendor", "peppol", "stylesheet-ubl.xslt")
+XSLT_PEPPOL = os.getenv("XSLT_PEPPOL", DEFAULT_XSLT_PEPPOL)
+
+# Rendering styles selectable via the `style` query parameter
+STYLE_DEFAULT = "default"
+STYLE_PEPPOL = "peppol"
+STYLES = {
+    STYLE_DEFAULT: "Bytebrain design (EN/FR/NL/DE, SEPA QR code, self-billing support)",
+    STYLE_PEPPOL: "Official OpenPeppol BIS Billing 3.0 stylesheet (English only, billing documents only)",
+}
+
 # Server
 PORT = int(os.getenv("PORT", 8000))
 

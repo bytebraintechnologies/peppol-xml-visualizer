@@ -6,9 +6,17 @@ import base64
 from fastapi import APIRouter, File, UploadFile, HTTPException, Query, Header
 from fastapi.responses import Response, JSONResponse
 
-from app.services.pdf_service import process_xml_to_pdf, transform_xml_to_html, check_dependencies
+from app.services.pdf_service import process_xml_to_pdf, transform_xml_to_html, check_dependencies, available_styles
+from app.core.config import STYLE_DEFAULT
 
 router = APIRouter()
+
+
+@router.get("/styles")
+async def list_styles():
+    """Lists the rendering styles accepted by the `style` parameter of /render."""
+    return available_styles()
+
 
 @router.post("/render")
 async def convert_xml_to_pdf(
@@ -16,6 +24,7 @@ async def convert_xml_to_pdf(
     lang: str = Query("en", description="Language code (en, fr, nl, de)"),
     watermark: str = Query(None, description="Watermark text to overlay on the PDF"),
     merge_attachments: bool = Query(False, description="Whether to merge embedded PDF attachments from the XML"),
+    style: str = Query(STYLE_DEFAULT, description="Rendering style: 'default' or 'peppol' (official OpenPeppol stylesheet). See GET /styles"),
     accept: str = Header(default="application/pdf")
 ):
     """
@@ -23,6 +32,7 @@ async def convert_xml_to_pdf(
     Respects Accept: text/html, application/json, or application/xml.
     """
     check_dependencies()
+    style = (style or STYLE_DEFAULT).strip().lower()
 
     with tempfile.TemporaryDirectory() as temp_dir:
         xml_path = os.path.join(temp_dir, f"input_{uuid.uuid4()}.xml")
@@ -35,7 +45,7 @@ async def convert_xml_to_pdf(
         # If user only wants HTML, we skip the PDF generation step (which is slow)
         if "text/html" in accept:
             html_path = os.path.join(temp_dir, f"output_{uuid.uuid4()}.html")
-            metrics = transform_xml_to_html(xml_path, html_path, lang)
+            metrics = transform_xml_to_html(xml_path, html_path, lang, style=style)
             # Remove large data not meant for headers
             metrics.pop("sepa_qr_b64", None)
             
@@ -44,7 +54,9 @@ async def convert_xml_to_pdf(
             return Response(content=html_bytes, media_type="text/html", headers=metrics)
 
         # Default: Generate PDF
-        pdf_bytes, metrics, qr_code = process_xml_to_pdf(xml_path, temp_dir, lang, watermark=watermark, merge_attachments=merge_attachments)
+        pdf_bytes, metrics, qr_code = process_xml_to_pdf(
+            xml_path, temp_dir, lang, watermark=watermark, merge_attachments=merge_attachments, style=style
+        )
         
         if "application/json" in accept:
             pdf_b64_str = base64.b64encode(pdf_bytes).decode('utf-8')

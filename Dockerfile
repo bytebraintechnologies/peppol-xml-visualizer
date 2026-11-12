@@ -30,6 +30,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ app/
 COPY assets/ assets/
 
+# Official OpenPeppol stylesheet for style=peppol (pinned + checksum-verified download)
+COPY scripts/fetch_peppol_stylesheet.sh scripts/
+RUN sh scripts/fetch_peppol_stylesheet.sh /project/vendor/peppol/stylesheet-ubl.xslt
+
 
 # 5. Environment
 ENV PORT=8000

@@ -30,6 +30,9 @@ Built with **FastAPI**, **SaxonC** (for XSLT 3.0), and **Microsoft Edge** (for h
     *   Localizable instructions and payment disclaimers (EN, FR, NL, DE).
 *   **Localized**:
     *   Built-in support for multiple languages (EN, FR, NL, DE).
+*   **Selectable Rendering Styles** (`style` parameter):
+    *   `default`: the Bytebrain design described above.
+    *   `peppol`: the official [OpenPeppol BIS Billing 3.0 stylesheet](https://docs.peppol.eu/poacc/billing/3.0/), which shows every field of the document.
 
 ## Requirements
 
@@ -81,13 +84,13 @@ Built with **FastAPI**, **SaxonC** (for XSLT 3.0), and **Microsoft Edge** (for h
 ### Endpoints
 
 #### `POST /render`
-#### `POST /render`
 Upload an XML file to convert it.
 
 **Query Parameters**:
 *   `lang`: (Optional) Language code (`en`, `fr`, `nl`, `de`). Default: `en`.
 *   `watermark`: (Optional) Text to overlay on the center of each page (e.g., `DUPLICATE`).
 *   `merge_attachments`: (Optional) Boolean (true/false). Whether to append embedded PDF attachments found in the XML to the output. Default: `false`.
+*   `style`: (Optional) Rendering style, `default` or `peppol`. Default: `default`. See [Rendering Styles](#rendering-styles).
 
 
 **Curl Example**:
@@ -112,6 +115,31 @@ curl -X POST "http://localhost:8000/render?lang=en" \
 }
 ```
 
+### Rendering Styles
+
+| Style | Stylesheet | Languages | SEPA QR in document | Self-billing |
+| :--- | :--- | :--- | :--- | :--- |
+| `default` | Bytebrain design | EN, FR, NL, DE | Yes | Yes |
+| `peppol` | Official OpenPeppol BIS Billing 3.0 (`stylesheet-ubl.xslt`) | EN only (`lang` is ignored) | No (still returned as `qr_code_base64` in JSON/XML responses) | No (returns `422`) |
+
+Watermark, page numbering and `merge_attachments` work with both styles.
+
+```bash
+curl -X POST "http://localhost:8000/render?style=peppol" \
+     -H "accept: application/pdf" \
+     -F "file=@path/to/invoice.xml" --output result.pdf
+```
+
+`GET /styles` lists the styles and whether each one is installed on the server.
+
+The official stylesheet is not committed to this repository. The Docker build downloads it (pinned commit, checksum-verified). For local development run:
+
+```bash
+scripts/fetch_peppol_stylesheet.sh
+```
+
+Without it the service still starts; `style=peppol` then returns `503`.
+
 ### Response Headers (Performance Metrics)
 The API returns custom headers to help you monitor performance:
 
@@ -121,6 +149,15 @@ The API returns custom headers to help you monitor performance:
 | `X-Perf-Pdf-Sec` | Time taken for PDF conversion (seconds, if applicable) |
 | `X-Perf-Total-Sec` | Total processing time (seconds) |
 | `X-Cache-Hit` | `True` if a pre-compiled XSLT was used from cache |
+| `X-Style` | Rendering style used (`default` or `peppol`) |
+
+### Running Tests
+
+```bash
+pip install -r requirements-dev.txt
+scripts/fetch_peppol_stylesheet.sh
+python -m pytest tests/test_styles.py
+```
 
 ## Configuration
 
@@ -131,6 +168,7 @@ The application uses environment variables for configuration. Create a `.env` fi
 | `PORT` | Port to run the server on | `8000` |
 | `XSLT_INVOICE` | Path to Invoice XSLT | `assets/styles/stylesheet-invoice.xslt` |
 | `XSLT_CREDITNOTE` | Path to CreditNote XSLT | `assets/styles/stylesheet-creditnote.xslt` |
+| `XSLT_PEPPOL` | Path to the official Peppol XSLT (`style=peppol`) | `vendor/peppol/stylesheet-ubl.xslt` |
 | `EDGE_BIN` | Path to Edge executable | Auto-detected |
 
 ## Deployment (Azure)
