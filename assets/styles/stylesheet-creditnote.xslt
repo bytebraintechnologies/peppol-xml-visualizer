@@ -429,7 +429,8 @@
         <xsl:if test="$is_self_billing">
             <div class="party-role"><xsl:value-of select="$i18n/entry[@key='supplier_label']/*[local-name()=$lang]"/></div>
         </xsl:if>
-        <div class="bold-name"><xsl:value-of select="cac:Party/cac:PartyName/cbc:Name"/></div>
+        <!-- BT-28 trading name is optional; fall back to BT-27 legal registration name (mandatory) -->
+        <div class="bold-name"><xsl:value-of select="(cac:Party/cac:PartyName/cbc:Name[normalize-space()], cac:Party/cac:PartyLegalEntity/cbc:RegistrationName)[1]"/></div>
         <xsl:apply-templates select="cac:Party/cac:PostalAddress"/>
         <div class="detail-row"><xsl:value-of select="$i18n/entry[@key='vat_id']/*[local-name()=$lang]"/>: <xsl:value-of select="cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/></div>
         <div class="detail-row"><xsl:value-of select="$i18n/entry[@key='company_id']/*[local-name()=$lang]"/>: <xsl:value-of select="cac:Party/cac:PartyLegalEntity/cbc:CompanyID"/></div>
@@ -441,10 +442,7 @@
         <xsl:if test="$is_self_billing">
             <div class="party-role"><xsl:value-of select="$i18n/entry[@key='issuer_label']/*[local-name()=$lang]"/></div>
         </xsl:if>
-        <div class="section-label"><xsl:value-of select="cac:Party/cac:PartyName/cbc:Name"/></div>
-        <xsl:if test="not(cac:Party/cac:PartyName/cbc:Name)">
-             <div class="section-label"><xsl:value-of select="cac:Party/cac:PartyLegalEntity/cbc:RegistrationName"/></div>
-        </xsl:if>
+        <div class="section-label"><xsl:value-of select="(cac:Party/cac:PartyName/cbc:Name[normalize-space()], cac:Party/cac:PartyLegalEntity/cbc:RegistrationName)[1]"/></div>
         <xsl:apply-templates select="cac:Party/cac:PostalAddress"/>
         <div class="detail-row"><xsl:value-of select="$i18n/entry[@key='vat_id']/*[local-name()=$lang]"/>: <xsl:value-of select="cac:Party/cac:PartyTaxScheme/cbc:CompanyID"/></div>
         <div class="detail-row"><xsl:value-of select="cac:Party/cac:Contact/cbc:ElectronicMail"/></div>
